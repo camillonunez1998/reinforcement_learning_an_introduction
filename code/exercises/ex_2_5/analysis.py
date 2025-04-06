@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 import constants as c
+print(f"Contenido del módulo constants (c): {dir(c)}")
 import plotting
 
 
@@ -23,7 +24,7 @@ import plotting
 
 def load_file(name):
     return pd.read_pickle(
-            os.path.join(c.Paths.output, 'ex_2_5', name),
+            os.path.join(c.paths.output, 'ex_2_5', name),
     ).rename(columns=int)
 
 
