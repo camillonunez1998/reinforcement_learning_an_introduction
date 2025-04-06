@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 """
 --------------------------------
@@ -8,7 +9,9 @@ created: 11/04/2018 18:02
 """
 import os
 
-
+"""These lines calculate the absolute path to a directory named 'data' 
+that is located in the parent directory of the current script. This is
+ a common way to define the location of project data relative to the code."""
 class Paths(object):
     data = os.path.abspath(
             os.path.join(

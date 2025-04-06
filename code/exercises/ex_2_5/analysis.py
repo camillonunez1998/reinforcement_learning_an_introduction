@@ -6,15 +6,23 @@ created: 11/04/2018 18:15
 ---------------------------------
 
 """
+
+import sys
 import os
+
+"""Añade el directorio 'code' al sys.path. El sys.path es una lista de cadenas que especifica
+ los directorios donde Python buscará los módulos cuando se encuentra una instrucción import."""
+sys.path.append("/Users/camilonunez/Desktop/Internship-2025/reinforcement_learning_an_introduction/code")
+
+import constants as c
+import plotting
 
 import matplotlib; matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import pandas as pd
 
-import constants as c
+###Debug, borrar
 print(f"Contenido del módulo constants (c): {dir(c)}")
-import plotting
 
 
 # Make the charts asked for in the thing
@@ -23,11 +31,21 @@ import plotting
 
 
 def load_file(name):
+#Utiliza la función read_pickle de la biblioteca pandas para cargar un objeto
+#(presumiblemente un DataFrame) desde el archivo especificado.
     return pd.read_pickle(
+#Construye la ruta completa al archivo que se va a cargar. Asume que hay una 
+#variable paths dentro del módulo constants (al que accedemos como c), que tiene
+#un atributo output que representa el directorio de salida principal. Luego, une
+#ese directorio con el subdirectorio 'ex_2_5' y el name del archivo.
             os.path.join(c.paths.output, 'ex_2_5', name),
+#Después de cargar el DataFrame, esta parte renombra las columnas del DataFrame
+#convirtiéndolas a tipo entero (int)
     ).rename(columns=int)
 
-
+#Esta es una construcción estándar en Python que asegura que el código dentro de
+# este bloque solo se ejecute cuando el script analysis.py se ejecuta directamente
+# (no cuando se importa como un módulo en otro script).
 if __name__ == '__main__':
     epsilon = 0.1
     estimator_type = 'ExponentialRecencyWeightedEstimator'.lower()
@@ -62,7 +80,7 @@ if __name__ == '__main__':
         plt.tight_layout()
         fig.savefig(
                 os.path.join(
-                        c.Paths.output,
+                        c.paths.output,
                         'ex_2_5',
                         'learning_curve.png'
                 )
